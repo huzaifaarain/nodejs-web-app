@@ -4,7 +4,7 @@ var router = express.Router()
 const hbs = require("hbs")
 const commonRoutes = require('./routes/common')
 const userRoutes = require('./routes/users')
-const logTime = require("./middlewares/logTime")
+const appLevelLogTime = require("./middlewares/appLevelLogTime")
 
   
 var app = express()  
@@ -19,6 +19,7 @@ app.set('view engine','hbs')
 app.set("views",viewsPath)  
 hbs.registerPartials(partialsPath)
 
+app.use(appLevelLogTime)
 app.use('/user/',userRoutes);  
 app.use('/',commonRoutes);  
 router.use(function (req, res, next) {
