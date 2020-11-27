@@ -1,9 +1,10 @@
 var express = require('express');
+
 var userControler = require('../controllers/UsersController');
-const logTime = require("../middlewares/logTime")
+const auth = require("../middlewares/auth")
 var router = express.Router();
 
-router.use(logTime)
+router.use(auth)
 
 router.get('/', userControler.index)
 

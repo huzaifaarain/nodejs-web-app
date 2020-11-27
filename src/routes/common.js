@@ -1,13 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var logTime = require("../middlewares/logTime")
-
-router.use(logTime)
-
+const AuthController = require("../controllers/AuthController")
 router.get('/favicon.ico', (req, res) => res.status(204));
-router.get('/', (req, res) => {
-    return res.render("index")
-})
+router.get('/', AuthController.login)
+router.post('/', AuthController.authenticateUser)
+router.get('/logout', AuthController.logout)
 router.get("*",(req,res) => {
     return res.render("404")
 })
